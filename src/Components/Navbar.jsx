@@ -22,12 +22,12 @@ const StyledToolbar = styled(Toolbar)({
   justifyContent: "space-between",
 });
 
-const StyledSearchBar = styled("div")((theme) => ({
-  backgroundColor: "white",
-  padding: "0 10px",
-  borderRadius: 10,
-  width: "40%",
-}));
+const StyledSearchBar = styled(Box)({
+    backgroundColor: "white",
+    padding: "0 10px",
+    borderRadius: 10,
+    width: "40%",
+  });
 
 export default function Navbar({ setMode, mode }) {
   const [isOpened, setIsOpened] = useState(false);
@@ -63,7 +63,7 @@ export default function Navbar({ setMode, mode }) {
           onClick={handleSidebarClick}
         ></AppsIcon>
         <StyledSearchBar>
-          <InputBase placeholder="Search..." />
+          <InputBase placeholder="Search..." sx={{color:"black"}}/>
         </StyledSearchBar>
         <Stack
           direction="row"
