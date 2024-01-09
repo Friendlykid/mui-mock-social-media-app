@@ -12,7 +12,7 @@ export default function Add() {
     setOpen(false);
   };
   const handleClose = (_, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -45,12 +45,12 @@ export default function Add() {
           <AddIcon />
         </Fab>
       </Tooltip>
-      <AddModal open={open} handleClick={handleClick} setOpen={setOpen}/>
+      <AddModal open={open} handleClick={handleClick} setOpen={setOpen} />
       <Snackbar
         open={openNotif}
-        anchorOrigin={{vertical: "bottom",horizontal: "center"} }
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         autoHideDuration={6000}
-        onClose={(handleClose)}
+        onClose={handleClose}
         message="Posted"
         action={action}
       />

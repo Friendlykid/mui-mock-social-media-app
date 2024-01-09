@@ -65,7 +65,7 @@ export default function RandomPost({ user, url, loading }) {
           </IconButton>
         }
         title={loading ? dots : user.name}
-        subheader={loading? dots : randomDate()}
+        subheader={loading ? dots : randomDate()}
       />
       <CardMedia component="img" image={url} alt={url} />
       <CardContent>
