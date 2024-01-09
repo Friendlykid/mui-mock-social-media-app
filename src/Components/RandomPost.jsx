@@ -31,15 +31,12 @@ export default function RandomPost({ user, url, loading }) {
       min: 4,
     },
   });
-  const [text, setText] = useState(lorem.generateParagraphs(1));
 
   useEffect(() => {
-    // Function to update the loading text with three trailing dots
+    // Function to create three trailing dots
     const updateLoadingText = () => {
       if (loading) {
         setDots((prevText) => {
-          // Add a dot or reset to three dots if already present
-          //const numberOfDots = (prevText.match(/\./g) || []).length + 1;
           if (prevText.length < 4) {
             return prevText.concat(".");
           }
@@ -47,11 +44,8 @@ export default function RandomPost({ user, url, loading }) {
         });
       }
     };
-
-    // Update the loading text in set interval
     const intervalId = setInterval(updateLoadingText, 200);
 
-    // Cleanup: clear the interval when the component is unmounted
     return () => clearInterval(intervalId);
   }, []);
 
@@ -71,7 +65,7 @@ export default function RandomPost({ user, url, loading }) {
           </IconButton>
         }
         title={loading ? dots : user.name}
-        subheader={randomDate()}
+        subheader={loading? dots : randomDate()}
       />
       <CardMedia component="img" image={url} alt={url} />
       <CardContent>
