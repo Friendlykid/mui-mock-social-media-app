@@ -9,7 +9,12 @@ import Typography from "@mui/material/Typography";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import { Checkbox, CircularProgress, LinearProgress } from "@mui/material";
+import {
+  Checkbox,
+  CircularProgress,
+  LinearProgress,
+  Tooltip,
+} from "@mui/material";
 import { LoremIpsum } from "lorem-ipsum";
 import { useEffect, useState } from "react";
 import randomDate from "../utils/randomDate";
@@ -44,7 +49,7 @@ export default function RandomPost({ user, url, loading }) {
     };
 
     // Update the loading text in set interval
-    const intervalId = setInterval(updateLoadingText, 50);
+    const intervalId = setInterval(updateLoadingText, 200);
 
     // Cleanup: clear the interval when the component is unmounted
     return () => clearInterval(intervalId);
@@ -79,15 +84,19 @@ export default function RandomPost({ user, url, loading }) {
         )}
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <Checkbox
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite sx={{ color: "red" }} />}
-          />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        <Tooltip title="Like" placement="top">
+          <IconButton aria-label="add to favorites">
+            <Checkbox
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite sx={{ color: "red" }} />}
+            />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Share" placement="top">
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+        </Tooltip>
       </CardActions>
     </Card>
   );

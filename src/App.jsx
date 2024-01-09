@@ -5,6 +5,7 @@ import Rightbar from "./Components/Rightbar";
 import Navbar from "./Components/Navbar";
 import { useEffect, useState } from "react";
 import getRandomUsers from "./utils/getRandomUsers";
+import Add from "./Components/Add";
 
 function App() {
   const [randomUsers, setRandomUsers] = useState([]);
@@ -42,6 +43,7 @@ function App() {
           <Feed users={randomUsers} />
           <Rightbar users={randomUsers} />
         </Stack>
+        <Add />
       </Box>
     </ThemeProvider>
   );
