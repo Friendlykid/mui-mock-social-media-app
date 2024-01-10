@@ -11,16 +11,14 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import {
   Checkbox,
-  CircularProgress,
-  LinearProgress,
   Tooltip,
 } from "@mui/material";
 import { LoremIpsum } from "lorem-ipsum";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import randomDate from "../utils/randomDate";
+import SkeletonPost from "./SkeletonPost";
 
 export default function RandomPost({ user, url, loading }) {
-  const [dots, setDots] = useState(".");
   const lorem = new LoremIpsum({
     sentencesPerParagraph: {
       max: 8,
@@ -32,50 +30,29 @@ export default function RandomPost({ user, url, loading }) {
     },
   });
 
-  useEffect(() => {
-    // Function to create three trailing dots
-    const updateLoadingText = () => {
-      if (loading) {
-        setDots((prevText) => {
-          if (prevText.length < 4) {
-            return prevText.concat(".");
-          }
-          return `.`;
-        });
-      }
-    };
-    const intervalId = setInterval(updateLoadingText, 200);
-
-    return () => clearInterval(intervalId);
-  }, []);
+  if(loading){
+    return <SkeletonPost/>;
+  }
 
   return (
     <Card sx={{ margin: 5, width: "70%" }}>
       <CardHeader
         avatar={
-          loading ? (
-            <CircularProgress />
-          ) : (
             <Avatar alt={user.name} src={user.photo} />
-          )
         }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-        title={loading ? dots : user.name}
-        subheader={loading ? dots : randomDate()}
+        title={user.name}
+        subheader={randomDate()}
       />
       <CardMedia component="img" image={url} alt={url} />
       <CardContent>
-        {loading ? (
-          <LinearProgress variant="indeterminate" />
-        ) : (
           <Typography variant="body2" color="text.secondary">
             {lorem.generateParagraphs(1)}
           </Typography>
-        )}
       </CardContent>
       <CardActions disableSpacing>
         <Tooltip title="Like" placement="top">
