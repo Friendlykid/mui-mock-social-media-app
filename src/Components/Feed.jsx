@@ -31,9 +31,7 @@ export default function Feed({ users }) {
   return (
     <Stack flex={4} p={2} alignItems="center">
       {(randomImages.length === 0 || users.length === 0) &&
-        new Array(numberOfPosts)
-          .fill()
-          .map((_, i) => <SkeletonPost key={i} />)}
+        new Array(numberOfPosts).fill().map((_, i) => <SkeletonPost key={i} />)}
       {randomImages.length !== 0 &&
         users.length !== 0 &&
         randomImages.map((image, i) => (
