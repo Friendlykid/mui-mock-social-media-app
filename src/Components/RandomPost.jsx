@@ -16,9 +16,8 @@ import {
 import { LoremIpsum } from "lorem-ipsum";
 import { useState } from "react";
 import randomDate from "../utils/randomDate";
-import SkeletonPost from "./SkeletonPost";
 
-export default function RandomPost({ user, url, loading }) {
+export default function RandomPost({ user, url }) {
   const lorem = new LoremIpsum({
     sentencesPerParagraph: {
       max: 8,
@@ -29,10 +28,8 @@ export default function RandomPost({ user, url, loading }) {
       min: 4,
     },
   });
-
-  if(loading){
-    return <SkeletonPost/>;
-  }
+  const [content, ] = useState(lorem.generateParagraphs(1));
+  const [date, ] = useState(randomDate());
 
   return (
     <Card sx={{ margin: 5, width: "70%" }}>
@@ -46,12 +43,12 @@ export default function RandomPost({ user, url, loading }) {
           </IconButton>
         }
         title={user.name}
-        subheader={randomDate()}
+        subheader={date}
       />
       <CardMedia component="img" image={url} alt={url} />
       <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {lorem.generateParagraphs(1)}
+            {content}
           </Typography>
       </CardContent>
       <CardActions disableSpacing>

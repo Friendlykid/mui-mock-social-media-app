@@ -2,6 +2,7 @@ import { Stack } from "@mui/material";
 import RandomPost from "./RandomPost";
 import { useEffect, useState } from "react";
 import getPictures from "../utils/getPictures";
+import SkeletonPost from "./SkeletonPost";
 
 function getRandomUser(users) {
   return users[Math.floor(Math.random() * users.length)];
@@ -32,11 +33,11 @@ export default function Feed({ users }) {
       {(randomImages.length === 0 || users.length === 0) &&
         new Array(numberOfPosts)
           .fill()
-          .map((_, i) => <RandomPost key={i} loading />)}
+          .map((_, i) => <SkeletonPost key={i} />)}
       {randomImages.length !== 0 &&
         users.length !== 0 &&
         randomImages.map((image, i) => (
-          <RandomPost key={i} url={image} user={getRandomUser(users)} />
+          <RandomPost key={image + i} url={image} user={getRandomUser(users)} />
         ))}
     </Stack>
   );
